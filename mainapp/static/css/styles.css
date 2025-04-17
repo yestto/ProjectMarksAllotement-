@@ -1,0 +1,102 @@
+body {
+    background: url('static/css/bg1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+}
+
+header {
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 1s ease-out;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    animation: slideIn 0.7s ease-out forwards;
+    opacity: 0; /* Hidden before animation */
+}
+
+.button-container {
+    z-index: 1;
+    display: flex;
+    gap: 20px;
+}
+
+.btn {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 1.2em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    backdrop-filter: blur(10px); /* Adds a slight blur to the button background */
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    background-color: rgba(255, 255, 255, 1); /* Slightly brighter on hover */
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for better contrast */
+    z-index: 0;
+    backdrop-filter: blur(5px); /* Adds a slight blur effect to the overlay for enhanced contrast */
+}
+
+/* Mobile-friendly adjustments */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2.5em;
+    }
+
+    .btn {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+
+    .button-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

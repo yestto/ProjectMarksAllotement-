@@ -1,0 +1,175 @@
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: linear-gradient(135deg, rgba(106, 183, 255, 0.8), rgba(161, 196, 253, 0.8), rgba(251, 194, 235, 0.8)), url('/static/nitk.jpeg');
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Form container */
+form {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: fadeInAndFloat 1s ease-out;
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+/* Form Heading */
+form h2 {
+    text-align: center;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: #4a90e2;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+form h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(to right, #4a90e2, #a1c4fd);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #4a90e2;
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    background-color: #f9f9f9;
+    font-size: 0.95rem;
+}
+
+/* Form elements */
+form p {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 15px rgba(74, 144, 226, 0.3);
+}
+
+input:invalid {
+    border-color: #e74c3c;
+    animation: shake 0.3s ease-in-out;
+}
+
+/* Submit Button */
+button[type="submit"], button#saveButton {
+    background: linear-gradient(135deg, #4a90e2, #357ab8);
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+button[type="submit"]::before, button#saveButton::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+    transform: scale(0);
+    transition: transform 0.5s ease-out;
+}
+
+button[type="submit"]:hover, button#saveButton:hover {
+    background: linear-gradient(135deg, #3a7bc8, #2d6ba6);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+button[type="submit"]:hover::before, button#saveButton:hover::before {
+    transform: scale(1);
+}
+
+button[type="submit"]:active, button#saveButton:active {
+    transform: translateY(1px);
+}
+
+/* Animations */
+@keyframes fadeInAndFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Responsive design */
+@media (max-width: 500px) {
+    form {
+        padding: 2rem;
+        max-width: 90%;
+    }
+}

@@ -1,0 +1,139 @@
+/* General body styling */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;  /* More modern font */
+    background: url('% static "bg.jpg" %') no-repeat center center fixed; 
+    background-color: #e9ecef;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container styling for content */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px;
+    background: linear-gradient(145deg, #ffffff, #f4f4f4);  /* Subtle gradient */
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);  /* Softer and larger shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Smooth hover effects */
+}
+
+.container:hover {
+    transform: translateY(-5px);  /* Slight lift on hover */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);  /* Deeper shadow */
+}
+
+/* Heading styling */
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 28px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+/* Table styling with fixed layout */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    font-size: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    table-layout: fixed;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;  /* Ensures round corners on the table */
+}
+
+/* Table header styling */
+thead {
+    background: linear-gradient(90deg, #4CAF50, #2e7d32);  /* Gradient header */
+    color: white;
+}
+
+/* Table data and header cell styling */
+th, td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/* Row hover effect */
+tr:hover {
+    background-color: #f0f9ff;  /* Light blue highlight on hover */
+    cursor: pointer;
+}
+
+/* Hidden details row initially */
+.details {
+    display: none;
+    background-color: #f9f9f9;
+}
+
+/* Table data for the details row */
+.details td {
+    padding: 10px;
+    border: none;
+}
+
+/* Column span cell padding */
+td[colspan] {
+    padding: 10px;
+}
+
+/* Strong text for details */
+strong {
+    color: #333;
+}
+
+/* Button container styling */
+.button-container {
+    text-align: left;
+    margin-top: 20px;
+}
+
+/* Button styling */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #3b6ccf, #1a53b0);  /* Button gradient */
+    color: white !important;
+    text-decoration: none !important;
+    border-radius: 8px;  /* Slightly rounder buttons */
+    font-size: 16px;
+    font-weight: bold;
+    border: 2px solid transparent;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(59, 108, 207, 0.4);  /* Button shadow */
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #5e8ce6, #3b6ccf);  /* Lighter gradient on hover */
+    border-color: #ffffff;
+    transform: translateY(-3px);  /* Lift effect on hover */
+    box-shadow: 0 6px 15px rgba(59, 108, 207, 0.5);  /* Deeper shadow */
+}
+
+.btn:active {
+    transform: translateY(1px);  /* Button pressed effect */
+}
+
+/* Animations */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container, table, .btn {
+    animation: slideIn 0.4s ease-out;  /* Smooth slide-in animation for container, table, and buttons */
+}
