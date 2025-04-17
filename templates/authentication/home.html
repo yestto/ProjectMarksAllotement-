@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">  <!-- Link to your CSS file -->
+    <style>
+        body {
+            background: url('bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        header {
+            position: relative;
+            z-index: 1; /* Ensures the text appears above the overlay */
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .button-container {
+            z-index: 1; /* Ensures the buttons appear above the overlay */
+            display: flex;
+            gap: 20px; /* Space between buttons */
+        }
+
+        .btn {
+            background-color: rgba(255, 255, 255, 0.7); /* Light background for buttons */
+            color: #333;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.2em;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for contrast */
+            z-index: 0; /* Below the text and buttons */
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <header>
+            <h1>Welcome to M.Tech Major Project Portal</h1>
+        </header>
+        <div class="button-container">
+            <a href="{% url 'student_list' 'mentor' %}" class="btn">Mentor</a>
+            <a href="{% url 'student_list' 'examiner' %}" class="btn">Examiner</a>
+        </div>
+    </div>
+</body>
+</html>

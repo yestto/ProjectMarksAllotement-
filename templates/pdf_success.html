@@ -1,0 +1,11 @@
+{% load base64_filters %}
+<body>
+    <div class="container">
+        <h2>PDF Download and Email Successful</h2>
+        <p>Your PDF has been generated and the email has been sent successfully. You can download the PDF from the link below:</p>
+        <a href="data:application/pdf;base64,{{ pdf_data|b64encode }}" download="student_marks_report.pdf" class="btn">Download PDF</a>
+        <div class="button-container">
+            <a href="{% url 'role_selection' %}" class="btn">Back to Role Selection</a>
+        </div>
+    </div>
+</body>

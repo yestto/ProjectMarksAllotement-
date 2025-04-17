@@ -1,0 +1,341 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="">
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #3949ab;
+            --accent-color: #ffc107;
+            --text-color: #ffffff;
+            --background-color: #f0f0f0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('{% static "bg1.jpg" %}') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 0;
+            backdrop-filter: blur(8px);
+        }
+
+        nav {
+            background-color: rgba(26, 35, 126, 0.9);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--accent-color);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+        }
+
+        .user-name {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 800px;
+            width: 100%;
+            color: #333;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            flex: 1 0 50%;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--secondary-color);
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        .form-button-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 1rem;
+        }
+
+        .form-button-container button {
+            padding: 0.5rem 1rem;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            transition: background-color 0.3s;
+        }
+
+        .form-button-container button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            max-width: 80%;
+            max-height: 80%;
+            overflow-y: auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            color: #333;
+        }
+
+        .modal-content table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .modal-content table td, .modal-content table th {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+
+        .modal-content table th {
+            background-color: #f4f4f9;
+        }
+
+        .modal-button-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 1rem;
+        }
+
+        .modal-button-container button {
+            padding: 0.5rem 1rem;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            transition: background-color 0.3s;
+        }
+
+        .modal-button-container button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .form-group {
+                flex: 1 0 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <nav>
+        <a href="#" class="logo">NITK IT</a>
+        <div class="user-profile">
+            <img src="{% static 'user-avatar.jpg' %}" alt="User Avatar" class="user-avatar">
+            <span class="user-name">{{ request.user.get_full_name }}</span>
+        </div>
+    </nav>
+    <main>
+        <div class="form-container">
+            <form id="marksheetForm" method="post">
+                <h2>Mark Submission</h2>
+                {% csrf_token %}
+                
+                <!-- Autofill Student Name and Roll Number -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="student_name">Student Name</label>
+                        <span class="font-medium">{{ student.name }}</span>
+                        <input type="hidden" name="student_name" id="student_name" value="{{ student.name }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="roll_no">Roll Number</label>
+                        <span class="font-medium">{{ student.roll_number }}</span>
+                        <input type="hidden" name="roll_no" id="roll_no" value="{{ student.roll_number }}">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    {% for field in form %}
+                        <div class="form-group">
+                            {{ field.label_tag }}
+                            {{ field }}
+                        </div>
+                        {% if forloop.counter|divisibleby:2 %}
+                            </div><div class="form-row">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="form-button-container">
+                    <button type="button" id="previewButton">Show Preview</button>
+                    <button type="submit" style="display: none;" id="submitButton">Submit</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <!-- Modal for Preview -->
+    <div id="previewModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Marksheet Preview</h2>
+            <div id="previewContent"></div>
+            <div class="modal-button-container">
+                <button id="confirmSave">Confirm and Submit</button>
+                <button id="closeModal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('marksheetForm');
+            const previewButton = document.getElementById('previewButton');
+            const submitButton = document.getElementById('submitButton');
+            const previewModal = document.getElementById('previewModal');
+            const previewContent = document.getElementById('previewContent');
+            const closeModal = document.getElementById('closeModal');
+            const confirmSave = document.getElementById('confirmSave');
+
+            function generatePreview() {
+                let previewHtml = '<table>';
+                previewHtml += `
+                    <tr><th>Field</th><th>Value</th></tr>
+                    <tr><td>Student Name</td><td>${document.getElementById('student_name').value}</td></tr>
+                    <tr><td>Roll Number</td><td>${document.getElementById('roll_no').value}</td></tr>
+                `;
+                
+                let totalMarks = 0;
+                form.querySelectorAll('.form-group input[type="number"]').forEach(input => {
+                    const label = input.previousElementSibling.textContent;
+                    const marks = parseFloat(input.value) || 0;
+                    totalMarks += marks;
+                    previewHtml += `<tr><td>${label}</td><td>${marks}</td></tr>`;
+                });
+
+                previewHtml += `<tr><td><strong>Total Marks</strong></td><td><strong>${totalMarks}</strong></td></tr>`;
+                previewHtml += '</table>';
+                previewContent.innerHTML = previewHtml;
+
+                // Show the modal
+                previewModal.style.display = 'flex';
+                submitButton.style.display = 'inline';
+            }
+
+            previewButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                generatePreview();
+            });
+
+            confirmSave.addEventListener('click', function () {
+                form.submit();
+            });
+
+            closeModal.addEventListener('click', function () {
+                previewModal.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - NITK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #3949ab;
+            --accent-color: #ffc107;
+            --text-color: #ffffff;
+            --background-color: #f0f0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('{% static "bg1.jpg" %}') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 0;
+            backdrop-filter: blur(8px);
+        }
+
+        nav {
+            background-color: rgba(26, 35, 126, 0.9);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+        }
+
+        .user-name {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* White panel over the login form */
+        .panel-overlay {
+            position: absolute;
+            top: 50%; /* Positioned in the middle */
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            width: 80%; /* Adjust as needed */
+            max-width: 500px;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        label {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-control {
+            border: 1px solid var(--secondary-color);
+            border-radius: 5px;
+            padding: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+            outline: none;
+        }
+
+        .btn {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            padding: 1rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .panel-overlay {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <nav>
+        <a href="#" class="logo" aria-label="NITK Home">NITK</a> <!-- Logo -->
+        <div class="user-profile">
+            <img src="{% static 'user-avatar.jpg' %}" alt="User Avatar" class="user-avatar">
+            <span class="user-name">{{ request.user.get_full_name }}</span>
+        </div>
+    </nav>
+
+    <!-- White Panel -->
+    <div class="panel-overlay">
+        <h2>Student Login</h2>
+        <form method="post" class="login-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="roll_number">Roll Number</label>
+                <input type="text" class="form-control" id="roll_number" name="roll_number" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+    </div>
+</body>
+</html>

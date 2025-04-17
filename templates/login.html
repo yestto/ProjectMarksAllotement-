@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professor Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('static/nitk.jpeg');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 0.75rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+
+        a {
+            text-align: center;
+            display: block;
+            margin-top: 1rem;
+            color: #337ab7;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .otp-section {
+            margin-top: 1rem;
+        }
+
+        .message-container {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f2dede;
+            color: #a94442;
+            border: 1px solid #ebccd1;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            input[type="text"],
+            input[type="password"] {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            button {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" name="username" value="{{ username }}" required>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" value="{{ password }}" required>
+
+            <!-- Initially show the login button -->
+            {% if show_generate_otp %}
+                <!-- Show "Generate OTP" button if user is identified as a professor -->
+                <button type="submit" name="generate_otp">Generate OTP</button>
+            {% else %}
+                <!-- Show "Login" button initially -->
+                <button type="submit" name="login_button">Login</button>
+            {% endif %}
+
+            <!-- Show OTP input field and login button if OTP is generated -->
+            {% if show_otp %}
+            <div class="otp-section">
+                <label for="otp">Enter OTP:</label>
+                <input type="text" name="otp" required>
+                <button type="submit" name="login">Login</button>
+            </div>
+            {% endif %}
+        </form>
+
+        <a href="{% url 'forgot_password' %}">Forgot Password?</a>
+
+        {% if messages %}
+        <div class="message-container">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

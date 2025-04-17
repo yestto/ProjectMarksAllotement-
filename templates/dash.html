@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container fade-in" style="margin-top: 2rem; max-width: 700px;">
+    <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1.5rem;">Welcome, {{ student.name }}</h2>
+    <h3 style="text-align: center; color: var(--secondary-color); margin-bottom: 1.5rem;">Project Title : {{ student.project_title }}</h3>
+
+    <div class="card mt-4" style="background-color: rgba(255, 255, 255, 0.9); border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <div class="card-body" style="padding: 1.5rem;">
+            <h5 class="card-title" style="color: var(--primary-color); font-weight: 600; text-align: center;">Your Marks</h5>
+            
+            <table class="table" style="width: 100%; margin-top: 1rem; border-collapse: collapse;">
+                <tr style="border-bottom: 1px solid var(--secondary-color);">
+                    <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: var(--primary-color);">Midsem Marks</th>
+                    <td style="padding: 0.75rem; text-align: right; color: var(--secondary-color);">
+                        {% if midsem_submitted %}
+                            {{ mid_marks }}
+                        {% else %}
+                            Marks not updated by all
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--secondary-color);">
+                    <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: var(--primary-color);">Endsem Marks</th>
+                    <td style="padding: 0.75rem; text-align: right; color: var(--secondary-color);">
+                        {% if endsem_submitted %}
+                            {{ endsem_marks }}
+                        {% else %}
+                            Marks not updated by all
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: var(--primary-color);">Total Marks</th>
+                    <td style="padding: 0.75rem; text-align: right; font-weight: bold; color: var(--accent-color);">
+                        {% if total_marks is not None %}
+                            {{ total_marks|floatformat:2 }}
+                        {% else %}
+                            Not available
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
